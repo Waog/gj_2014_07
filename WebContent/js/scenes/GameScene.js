@@ -41,33 +41,33 @@ Scene.GameScene.prototype = {
 
         this.player1 = this.add.sprite(30, 100, "player1");
         this.player1.anchor.setTo(0.5, 0.5);
-        this.game.physics.p2.enable(this.player1, true);
+        this.game.physics.p2.enable(this.player1);
         this.player1.body.setCollisionGroup(this.playerCollisionGroup);
         this.player1.body.collides(this.scorpionCollisionGroup, this.onLose, this);
 
         this.shield1 = this.add.sprite(this.player1.x, this.player1.y, "shield1");
         this.shield1.anchor.setTo(0.5, 0.5);
-        this.game.physics.p2.enable(this.shield1, true);
+        this.game.physics.p2.enable(this.shield1);
         this.shield1.body.setRectangle(15, 70, 40, 0);
         this.shield1.body.setCollisionGroup(this.shieldCollisionGroup);
         this.shield1.body.collides(this.scorpionCollisionGroup, this.killScorpion, this);
 
         this.player2 = this.add.sprite(30, 300, "player2");
         this.player2.anchor.setTo(0.5, 0.5);
-        this.game.physics.p2.enable(this.player2, true);
+        this.game.physics.p2.enable(this.player2);
         this.player2.body.setCollisionGroup(this.playerCollisionGroup);
         this.player2.body.collides(this.scorpionCollisionGroup, this.onLose, this);
 
         this.shield2 = this.add.sprite(this.player2.x, this.player2.y, "shield2");
         this.shield2.anchor.setTo(0.5, 0.5);
-        this.game.physics.p2.enable(this.shield2, true);
+        this.game.physics.p2.enable(this.shield2);
         this.shield2.body.setRectangle(15, 70, 40, 0);
         this.shield2.body.setCollisionGroup(this.shieldCollisionGroup);
         this.shield2.body.collides(this.scorpionCollisionGroup, this.killScorpion, this);
 
         this.ship = this.add.sprite(600, 200, "ship");
         this.ship.anchor.setTo(0.5, 0.5);
-        this.game.physics.p2.enable(this.ship, true);
+        this.game.physics.p2.enable(this.ship);
         this.ship.body.setCollisionGroup(this.shipCollisionGroup);
         this.ship.body.collides(this.playerCollisionGroup, this.onWin, this);
 
@@ -87,41 +87,75 @@ Scene.GameScene.prototype = {
     update : function() {
 
 // player 1 control
+        this.x1TurnDirection;
+        this.y1TurnDirection;
+
         if (this.upKey1.isDown)
         {
             this.player1.body.y--;
+            this.y1TurnDirection = -1000;
         }
         else if (this.downKey1.isDown)
         {
             this.player1.body.y++;
+            this.y1TurnDirection = 1000;
+        } else {
+            this.y1TurnDirection = 0;
         }
 
         if (this.leftKey1.isDown)
         {
             this.player1.body.x--;
+            this.x1TurnDirection = -1000;
         }
         else if (this.rightKey1.isDown)
         {
             this.player1.body.x++;
+            this.x1TurnDirection = 1000;
+        } else {
+            this.x1TurnDirection = 0;
         }
 
 // player 2 control
+        this.x2TurnDirection;
+        this.y2TurnDirection;
+
         if (this.upKey2.isDown)
         {
             this.player2.body.y--;
+            this.y2TurnDirection = -1000;
         }
         else if (this.downKey2.isDown)
         {
             this.player2.body.y++;
+            this.y2TurnDirection = 1000;
+        }
+        else {
+            this.y2TurnDirection = 0;
         }
 
         if (this.leftKey2.isDown)
         {
             this.player2.body.x--;
+            this.x2TurnDirection = -1000;
         }
         else if (this.rightKey2.isDown)
         {
             this.player2.body.x++;
+            this.x2TurnDirection = 1000;
+        }
+        else {
+            this.x2TurnDirection = 0;
+        }
+
+        if (this.x1TurnDirection !== 0 || this.y1TurnDirection !== 0) {
+            this.player1.body.rotation = this.game.physics.arcade.angleToXY(this.player1, this.player1.x + this.x1TurnDirection + 1, this.player1.y + this.y1TurnDirection + 1);
+            this.player1.body.rotation += Math.PI / 2;
+        }
+
+        if (this.x2TurnDirection !== 0 || this.y2TurnDirection !== 0) {
+            this.player2.body.rotation = this.game.physics.arcade.angleToXY(this.player2, this.player2.x + this.x2TurnDirection + 1, this.player2.y + this.y2TurnDirection + 1);
+            this.player2.body.rotation += Math.PI / 2;
         }
 
         this.shield1.body.x = this.player1.x;
@@ -152,7 +186,7 @@ Scene.GameScene.prototype = {
     },
 
     addPhysicsMovmentAndColision : function(sprite) {
-        this.game.physics.p2.enable(sprite, true);
+        this.game.physics.p2.enable(sprite);
         sprite.body.setCollisionGroup(this.scorpionCollisionGroup);
         sprite.body.collides([this.shieldCollisionGroup, this.playerCollisionGroup]);
     },

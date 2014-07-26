@@ -2,9 +2,9 @@ Scene.GameScene = function(game) {
 };
 Scene.GameScene.prototype = {
     preload : function() {
-        this.load.image('gameBg', 'assets/placeholder/img/squareBlue.png');
-        this.load.image('enemy', 'assets/placeholder/img/headBlack.png');
-        this.load.image('friend', 'assets/placeholder/img/headWhite.png');
+        this.load.image('gameBg', 'assets/img/backgrond600x6k.png');
+        this.load.image('enemy', 'assets/img/scorpion.png');
+        this.load.image('friend', 'assets/img/alien.png');
 
         this.game.load.audio('hit', utils
                 .getAudioFileArray('assets/placeholder/fx/hit'));
@@ -20,7 +20,7 @@ Scene.GameScene.prototype = {
         this.bg.width = this.game.world.width;
         this.bg.height = this.game.world.height;
 
-        var tutorialString = "shoot the black guy,\ndon't shot the white guy.";
+        var tutorialString = "player 1: asdw\nplayer 2: arrow keys\nprotect each other!";
         this.game.add.text(10, 10, tutorialString);
 
         enemy = this.add.sprite(100, 100, "enemy");

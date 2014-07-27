@@ -2,7 +2,7 @@ Scene.GameScene = function(game) {
 };
 Scene.GameScene.prototype = {
     preload : function() {
-        this.load.image('gameBg', 'assets/img/backgrond600x6k.png');
+        Bg.preload(this);
         Scorpion.preload(this);
         Player.preload(this);
         Shield.preload(this);
@@ -25,9 +25,7 @@ Scene.GameScene.prototype = {
         this.game.shieldCollisionGroup = this.game.physics.p2.createCollisionGroup();
         this.game.shipCollisionGroup = this.game.physics.p2.createCollisionGroup();
 
-        this.bg = this.add.sprite(0, 0, "gameBg");
-        this.bg.width = this.game.world.width;
-        this.bg.height = this.game.world.height;
+        new Bg(this);
 
         var tutorialString = "player 1: asdw\nplayer 2: arrow keys\nprotect each other!";
         this.game.add.text(10, 10, tutorialString);

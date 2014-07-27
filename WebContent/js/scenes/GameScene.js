@@ -5,7 +5,6 @@ Scene.GameScene.prototype = {
         this.load.image('gameBg', 'assets/img/backgrond600x6k.png');
         Scorpion.preload(this);
         Player.preload(this);
-        this.load.image('player2', 'assets/img/alien01.png');
         this.load.image('shield1', 'assets/img/shield01.png');
         this.load.image('shield2', 'assets/img/shield02.png');
         this.load.image('ship', 'assets/img/spaceship.png');
@@ -36,6 +35,7 @@ Scene.GameScene.prototype = {
         this.scorpion = new Scorpion(800, 200, this.game, this);
 
         this.player1 = new Player(this, 1, this.onLose, this);
+        this.player2 = new Player(this, 2, this.onLose, this);
 
         this.shield1 = this.add.sprite(this.player1.sprite.x, this.player1.sprite.y, "shield1");
         this.shield1.anchor.setTo(0.5, 0.5);
@@ -44,13 +44,7 @@ Scene.GameScene.prototype = {
         this.shield1.body.setCollisionGroup(this.game.shieldCollisionGroup);
         this.shield1.body.collides(this.game.scorpionCollisionGroup, this.scorpion.kill, this.scorpion);
 
-        this.player2 = this.add.sprite(30, 300, "player2");
-        this.player2.anchor.setTo(0.5, 0.5);
-        this.game.physics.p2.enable(this.player2);
-        this.player2.body.setCollisionGroup(this.game.playerCollisionGroup);
-        this.player2.body.collides(this.game.scorpionCollisionGroup, this.onLose, this);
-
-        this.shield2 = this.add.sprite(this.player2.x, this.player2.y, "shield2");
+        this.shield2 = this.add.sprite(this.player2.sprite.x, this.player2.sprite.y, "shield2");
         this.shield2.anchor.setTo(0.5, 0.5);
         this.game.physics.p2.enable(this.shield2);
         this.shield2.body.setRectangle(15, 70, 40, 0);
@@ -63,85 +57,40 @@ Scene.GameScene.prototype = {
         this.ship.body.setCollisionGroup(this.game.shipCollisionGroup);
         this.ship.body.collides(this.game.playerCollisionGroup, this.onWin, this);
 
-        this.upKey2 = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
-        this.downKey2 = this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-        this.leftKey2 = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-        this.rightKey2 = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-
         this.game.physics.p2.setImpactEvents(true);
     },
 
     update : function() {
-
-
         this.player1.update();
+        this.player2.update();
 
+        this.shield1.body.x = this.player1.sprite.x;
+        this.shield1.body.y = this.player1.sprite.y;
+        this.shield1.body.rotation = this.game.physics.arcade.angleToXY(this.player1.sprite, this.player2.sprite.x, this.player2.sprite.y);
+        this.shield1.body.rotation += Math.PI;
 
-// player 2 control
-this.x2TurnDirection;
-this.y2TurnDirection;
+        this.shield2.body.x = this.player2.sprite.x;
+        this.shield2.body.y = this.player2.sprite.y;
+        this.shield2.body.rotation = this.game.physics.arcade.angleToXY(this.player2.sprite, this.player1.sprite.x, this.player1.sprite.y);
+        this.shield2.body.rotation += Math.PI;
 
-if (this.upKey2.isDown)
-{
-    this.player2.body.y--;
-    this.y2TurnDirection = -1000;
-}
-else if (this.downKey2.isDown)
-{
-    this.player2.body.y++;
-    this.y2TurnDirection = 1000;
-}
-else {
-    this.y2TurnDirection = 0;
-}
+        this.scorpion.update(this.player1.sprite);
+    },
 
-if (this.leftKey2.isDown)
-{
-    this.player2.body.x--;
-    this.x2TurnDirection = -1000;
-}
-else if (this.rightKey2.isDown)
-{
-    this.player2.body.x++;
-    this.x2TurnDirection = 1000;
-}
-else {
-    this.x2TurnDirection = 0;
-}
+    onWin : function() {
+        this.hitSound.play();
+        this.game.state.start('Win');
+    },
 
-if (this.x2TurnDirection !== 0 || this.y2TurnDirection !== 0) {
-    this.player2.body.rotation = this.game.physics.arcade.angleToXY(this.player2, this.player2.x + this.x2TurnDirection + 1, this.player2.y + this.y2TurnDirection + 1);
-    this.player2.body.rotation += Math.PI / 2;
-}
+    onLose : function() {
+        this.hitSound.play();
+        this.game.state.start('Lose');
+    },
 
-this.shield1.body.x = this.player1.sprite.x;
-this.shield1.body.y = this.player1.sprite.y;
-this.shield1.body.rotation = this.game.physics.arcade.angleToXY(this.player1.sprite, this.player2.x, this.player2.y);
-this.shield1.body.rotation += Math.PI;
+    shutdown : function() {
+        this.game.gameplayMusic.stop();
+    },
 
-
-this.shield2.body.x = this.player2.x;
-this.shield2.body.y = this.player2.y;
-this.shield2.body.rotation = this.game.physics.arcade.angleToXY(this.player2, this.player1.sprite.x, this.player1.sprite.y);
-this.shield2.body.rotation += Math.PI;
-
-this.scorpion.update(this.player1.sprite);
-},
-
-onWin : function() {
-    this.hitSound.play();
-    this.game.state.start('Win');
-},
-
-onLose : function() {
-    this.hitSound.play();
-    this.game.state.start('Lose');
-},
-
-shutdown : function() {
-    this.game.gameplayMusic.stop();
-},
-
-render : function() {
-}
+    render : function() {
+    }
 };

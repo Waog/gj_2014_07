@@ -6,8 +6,7 @@ Scene.GameScene.prototype = {
         Scorpion.preload(this);
         Player.preload(this);
         Shield.preload(this);
-
-        this.load.image('ship', 'assets/img/spaceship.png');
+        Ship.preload(this);
 
         this.game.load.audio('hit', utils
             .getAudioFileArray('assets/placeholder/fx/hit'));
@@ -19,6 +18,7 @@ Scene.GameScene.prototype = {
     create : function() {
         this.game.physics.startSystem(Phaser.Physics.P2JS);
         this.game.physics.p2.restitution = 0.9;
+        this.game.physics.p2.setImpactEvents(true);
 
         this.game.scorpionCollisionGroup = this.game.physics.p2.createCollisionGroup();
         this.game.playerCollisionGroup = this.game.physics.p2.createCollisionGroup();
@@ -37,14 +37,7 @@ Scene.GameScene.prototype = {
         this.player2 = new Player(this, 2, this.onLose, this);
         this.shield1 = new Shield(this, this.scorpion, this.player1, this.player2);
         this.shield2 = new Shield(this, this.scorpion, this.player2, this.player1);
-
-        this.ship = this.add.sprite(600, 200, "ship");
-        this.ship.anchor.setTo(0.5, 0.5);
-        this.game.physics.p2.enable(this.ship);
-        this.ship.body.setCollisionGroup(this.game.shipCollisionGroup);
-        this.ship.body.collides(this.game.playerCollisionGroup, this.onWin, this);
-
-        this.game.physics.p2.setImpactEvents(true);
+        this.ship = new Ship(this);
     },
 
     update : function() {

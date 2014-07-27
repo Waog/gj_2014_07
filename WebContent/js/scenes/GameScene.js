@@ -5,8 +5,8 @@ Scene.GameScene.prototype = {
         this.load.image('gameBg', 'assets/img/backgrond600x6k.png');
         Scorpion.preload(this);
         Player.preload(this);
-        this.load.image('shield1', 'assets/img/shield01.png');
-        this.load.image('shield2', 'assets/img/shield02.png');
+        Shield.preload(this);
+
         this.load.image('ship', 'assets/img/spaceship.png');
 
         this.game.load.audio('hit', utils
@@ -33,16 +33,9 @@ Scene.GameScene.prototype = {
         this.game.add.text(10, 10, tutorialString);
 
         this.scorpion = new Scorpion(800, 200, this.game, this);
-
         this.player1 = new Player(this, 1, this.onLose, this);
         this.player2 = new Player(this, 2, this.onLose, this);
-
-        this.shield1 = this.add.sprite(this.player1.sprite.x, this.player1.sprite.y, "shield1");
-        this.shield1.anchor.setTo(0.5, 0.5);
-        this.game.physics.p2.enable(this.shield1, true);
-        this.shield1.body.setRectangle(15, 70, 40, 0);
-        this.shield1.body.setCollisionGroup(this.game.shieldCollisionGroup);
-        this.shield1.body.collides(this.game.scorpionCollisionGroup, this.scorpion.kill, this.scorpion);
+        this.shield1 = new Shield(this, this.scorpion, this.player1, this.player2);
 
         this.shield2 = this.add.sprite(this.player2.sprite.x, this.player2.sprite.y, "shield2");
         this.shield2.anchor.setTo(0.5, 0.5);
@@ -63,11 +56,7 @@ Scene.GameScene.prototype = {
     update : function() {
         this.player1.update();
         this.player2.update();
-
-        this.shield1.body.x = this.player1.sprite.x;
-        this.shield1.body.y = this.player1.sprite.y;
-        this.shield1.body.rotation = this.game.physics.arcade.angleToXY(this.player1.sprite, this.player2.sprite.x, this.player2.sprite.y);
-        this.shield1.body.rotation += Math.PI;
+        this.shield1.update();
 
         this.shield2.body.x = this.player2.sprite.x;
         this.shield2.body.y = this.player2.sprite.y;

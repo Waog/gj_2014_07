@@ -3,8 +3,7 @@ Scene.MainMenu = function(game) {
 Scene.MainMenu.prototype = {
     preload : function() {
         this.load.image('mainMenuBg',
-                'assets/placeholder/img/squareGradientTopDownGrey.png');
-        this.game.mainMenuMusic.play();
+            'assets/placeholder/img/squareGradientTopDownGrey.png');
     },
 
     create : function() {
@@ -14,8 +13,8 @@ Scene.MainMenu.prototype = {
 
         utils.createButton(this, this.game, "Start", this.onStart, 100, 300);
         utils
-                .createButton(this, this.game, "Credits", this.onCredits, 400,
-                        300);
+        .createButton(this, this.game, "Credits", this.onCredits, 400,
+            300);
 
     },
 
@@ -27,9 +26,5 @@ Scene.MainMenu.prototype = {
     onCredits : function() {
         this.game.clickSound.play();
         this.game.state.start('Credits');
-    },
-
-    shutdown : function() {
-        this.game.mainMenuMusic.stop();
     }
 };

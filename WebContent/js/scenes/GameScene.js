@@ -11,8 +11,6 @@ Scene.GameScene.prototype = {
         this.game.load.audio('hit', utils
             .getAudioFileArray('assets/placeholder/fx/hit'));
         this.hitSound = this.game.add.audio('hit');
-
-        this.game.gameplayMusic.play();
     },
 
     create : function() {
@@ -54,12 +52,5 @@ Scene.GameScene.prototype = {
     onLose : function() {
         this.hitSound.play();
         this.game.state.start('Lose');
-    },
-
-    shutdown : function() {
-        this.game.gameplayMusic.stop();
-    },
-
-    render : function() {
     }
 };

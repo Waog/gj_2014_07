@@ -3,8 +3,7 @@ Scene.Win = function(game) {
 Scene.Win.prototype = {
     preload : function() {
         this.load.image('winBg',
-                'assets/placeholder/img/squareGradientTopDownGreen.png');
-        this.game.winSceneMusic.play();
+            'assets/placeholder/img/squareGradientTopDownGreen.png');
     },
 
     create : function() {
@@ -21,16 +20,12 @@ Scene.Win.prototype = {
             align : "center"
         };
         var text = this.game.add.text(this.game.world.centerX,
-                this.game.world.centerY, textString, textStyle);
+            this.game.world.centerY, textString, textStyle);
         text.anchor.setTo(0.5, 0.5);
     },
 
     onInteraction : function() {
         this.game.clickSound.play();
         this.game.state.start('MainMenu');
-    },
-    
-    shutdown : function() {
-        this.game.winSceneMusic.stop();
     }
 };

@@ -3,8 +3,7 @@ Scene.Lose = function(game) {
 Scene.Lose.prototype = {
     preload : function() {
         this.load.image('loseBg',
-                'assets/placeholder/img/squareGradientTopDownRed.png');
-        this.game.loseSceneMusic.play();
+            'assets/placeholder/img/squareGradientTopDownRed.png');
     },
 
     create : function() {
@@ -21,16 +20,12 @@ Scene.Lose.prototype = {
             align : "center"
         };
         var text = this.game.add.text(this.game.world.centerX,
-                this.game.world.centerY, textString, textStyle);
+            this.game.world.centerY, textString, textStyle);
         text.anchor.setTo(0.5, 0.5);
     },
 
     onInteraction : function() {
         this.game.clickSound.play();
         this.game.state.start('MainMenu');
-    },
-    
-    shutdown : function() {
-        this.game.loseSceneMusic.stop();
     }
 };

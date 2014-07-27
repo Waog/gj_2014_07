@@ -7,24 +7,24 @@ Scene.Preloader.prototype = {
         this.preloadBg.width = this.game.world.width;
         this.preloadBg.height = this.game.world.height;
         this.preloadBar = this.add.sprite(this.game.world.centerX,
-                this.game.world.centerY, 'preloaderBar');
+            this.game.world.centerY, 'preloaderBar');
         this.preloadBar.anchor.setTo(0.5, 0.5);
         this.load.setPreloadSprite(this.preloadBar);
 
         // preload and configure global content
         this.game.stage.backgroundColor = '#123456';
         this.load.spritesheet('button',
-                'assets/placeholder/spriteSheets/button.png', 300, 100);
+            'assets/placeholder/spriteSheets/button.png', 300, 100);
         this.game.load.audio('click', utils
-                .getAudioFileArray('assets/placeholder/fx/blip'));
+            .getAudioFileArray('assets/placeholder/fx/blip'));
         this.game.clickSound = this.game.add.audio('click');
 
         this.game.load.audio('track01', utils
-                .getAudioFileArray('assets/placeholder/music/track01'));
+            .getAudioFileArray('assets/placeholder/music/track01'));
         this.game.load.audio('track02', utils
-                .getAudioFileArray('assets/placeholder/music/track02'));
+            .getAudioFileArray('assets/placeholder/music/track02'));
         this.game.load.audio('track03', utils
-                .getAudioFileArray('assets/placeholder/music/track03'));
+            .getAudioFileArray('assets/placeholder/music/track03'));
 
         this.track01 = this.game.add.audio('track01', 0);
         this.track02 = this.game.add.audio('track02', 0);

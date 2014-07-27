@@ -1,8 +1,6 @@
 function Scorpion(x, y, game, scene) {
 	this.game = game;
 
-	this.prepareCollisionGroups();
-
 	this.sprite = scene.add.sprite(x, y, "scorpion");
 	this.addPhysicsMovmentAndColision();
 }
@@ -11,18 +9,6 @@ Scorpion.SPEED = 150;
 
 Scorpion.preload = function(scene) {
 	scene.load.image('scorpion', 'assets/img/scorpion.png');
-};
-
-Scorpion.prototype.prepareCollisionGroups = function() {
-	if (!this.game.scorpionCollisionGroup) {
-		this.game.scorpionCollisionGroup = this.game.physics.p2.createCollisionGroup()
-	}
-	if (!this.game.playerCollisionGroup) {
-		this.game.playerCollisionGroup = this.game.physics.p2.createCollisionGroup()
-	}
-	if (!this.game.shieldCollisionGroup) {
-		this.game.shieldCollisionGroup = this.game.physics.p2.createCollisionGroup()
-	}
 };
 
 Scorpion.prototype.update = function(player) {

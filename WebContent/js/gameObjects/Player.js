@@ -4,10 +4,12 @@ function Player(scene, playerNumber, loseCallback, loseCallbackThis) {
 
 	this.sprite = scene.add.sprite(30, 100, "player");
 	this.sprite.anchor.setTo(0.5, 0.5);
+
 	scene.game.physics.p2.enable(this.sprite);
 	this.sprite.body.setCollisionGroup(scene.game.playerCollisionGroup);
 	this.sprite.body.collides(scene.game.scorpionCollisionGroup, loseCallback, loseCallbackThis);
 	this.sprite.body.collides(scene.game.shipCollisionGroup);
+	this.sprite.body.collideWorldBounds = true;
 
 	this.player1Keys = {};
 	this.player1Keys.upKey = scene.game.input.keyboard.addKey(Phaser.Keyboard.W);
@@ -27,6 +29,8 @@ Player.preload = function(scene) {
 };
 
 Player.prototype.update = function() {
+	this.sprite.body.setZeroVelocity();
+
 	var keysToCheck = this.player1Keys;
 	if (this.playerNumber == 2) {
 		keysToCheck = this.player2Keys;
@@ -37,26 +41,20 @@ Player.prototype.update = function() {
 
 	var playerSpeed = 5;
 
-	if (keysToCheck.upKey.isDown)
-	{
+	if (keysToCheck.upKey.isDown) {
 		this.sprite.body.y -= playerSpeed;
 		this.yDirection = -1000;
-	}
-	else if (keysToCheck.downKey.isDown)
-	{
+	} else if (keysToCheck.downKey.isDown) {
 		this.sprite.body.y += playerSpeed;
 		this.yDirection = 1000;
 	} else {
 		this.yDirection = 0;
 	}
 
-	if (keysToCheck.leftKey.isDown)
-	{
+	if (keysToCheck.leftKey.isDown) {
 		this.sprite.body.x -= playerSpeed;
 		this.xDirection = -1000;
-	}
-	else if (keysToCheck.rightKey.isDown)
-	{
+	} else if (keysToCheck.rightKey.isDown) {
 		this.sprite.body.x += playerSpeed;
 		this.xDirection = 1000;
 	} else {

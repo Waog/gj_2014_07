@@ -23,6 +23,7 @@ Scene.GameScene.prototype = {
         this.game.playerCollisionGroup = this.game.physics.p2.createCollisionGroup();
         this.game.shieldCollisionGroup = this.game.physics.p2.createCollisionGroup();
         this.game.shipCollisionGroup = this.game.physics.p2.createCollisionGroup();
+        this.game.physics.p2.updateBoundsCollisionGroup();
 
         new Bg(this);
 

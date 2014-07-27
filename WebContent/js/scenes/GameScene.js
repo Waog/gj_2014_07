@@ -12,7 +12,7 @@ Scene.GameScene.prototype = {
 
 
         this.game.load.audio('hit', utils
-                .getAudioFileArray('assets/placeholder/fx/hit'));
+            .getAudioFileArray('assets/placeholder/fx/hit'));
         this.hitSound = this.game.add.audio('hit');
 
         this.game.gameplayMusic.play();
@@ -87,144 +87,144 @@ Scene.GameScene.prototype = {
     update : function() {
 
 // player 1 control
-        this.x1TurnDirection;
-        this.y1TurnDirection;
+this.x1TurnDirection;
+this.y1TurnDirection;
 
-        if (this.upKey1.isDown)
-        {
-            this.player1.body.y--;
-            this.y1TurnDirection = -1000;
-        }
-        else if (this.downKey1.isDown)
-        {
-            this.player1.body.y++;
-            this.y1TurnDirection = 1000;
-        } else {
-            this.y1TurnDirection = 0;
-        }
+if (this.upKey1.isDown)
+{
+    this.player1.body.y--;
+    this.y1TurnDirection = -1000;
+}
+else if (this.downKey1.isDown)
+{
+    this.player1.body.y++;
+    this.y1TurnDirection = 1000;
+} else {
+    this.y1TurnDirection = 0;
+}
 
-        if (this.leftKey1.isDown)
-        {
-            this.player1.body.x--;
-            this.x1TurnDirection = -1000;
-        }
-        else if (this.rightKey1.isDown)
-        {
-            this.player1.body.x++;
-            this.x1TurnDirection = 1000;
-        } else {
-            this.x1TurnDirection = 0;
-        }
+if (this.leftKey1.isDown)
+{
+    this.player1.body.x--;
+    this.x1TurnDirection = -1000;
+}
+else if (this.rightKey1.isDown)
+{
+    this.player1.body.x++;
+    this.x1TurnDirection = 1000;
+} else {
+    this.x1TurnDirection = 0;
+}
 
 // player 2 control
-        this.x2TurnDirection;
-        this.y2TurnDirection;
+this.x2TurnDirection;
+this.y2TurnDirection;
 
-        if (this.upKey2.isDown)
-        {
-            this.player2.body.y--;
-            this.y2TurnDirection = -1000;
-        }
-        else if (this.downKey2.isDown)
-        {
-            this.player2.body.y++;
-            this.y2TurnDirection = 1000;
-        }
-        else {
-            this.y2TurnDirection = 0;
-        }
+if (this.upKey2.isDown)
+{
+    this.player2.body.y--;
+    this.y2TurnDirection = -1000;
+}
+else if (this.downKey2.isDown)
+{
+    this.player2.body.y++;
+    this.y2TurnDirection = 1000;
+}
+else {
+    this.y2TurnDirection = 0;
+}
 
-        if (this.leftKey2.isDown)
-        {
-            this.player2.body.x--;
-            this.x2TurnDirection = -1000;
-        }
-        else if (this.rightKey2.isDown)
-        {
-            this.player2.body.x++;
-            this.x2TurnDirection = 1000;
-        }
-        else {
-            this.x2TurnDirection = 0;
-        }
+if (this.leftKey2.isDown)
+{
+    this.player2.body.x--;
+    this.x2TurnDirection = -1000;
+}
+else if (this.rightKey2.isDown)
+{
+    this.player2.body.x++;
+    this.x2TurnDirection = 1000;
+}
+else {
+    this.x2TurnDirection = 0;
+}
 
-        if (this.x1TurnDirection !== 0 || this.y1TurnDirection !== 0) {
-            this.player1.body.rotation = this.game.physics.arcade.angleToXY(this.player1, this.player1.x + this.x1TurnDirection + 1, this.player1.y + this.y1TurnDirection + 1);
-            this.player1.body.rotation += Math.PI / 2;
-        }
+if (this.x1TurnDirection !== 0 || this.y1TurnDirection !== 0) {
+    this.player1.body.rotation = this.game.physics.arcade.angleToXY(this.player1, this.player1.x + this.x1TurnDirection + 1, this.player1.y + this.y1TurnDirection + 1);
+    this.player1.body.rotation += Math.PI / 2;
+}
 
-        if (this.x2TurnDirection !== 0 || this.y2TurnDirection !== 0) {
-            this.player2.body.rotation = this.game.physics.arcade.angleToXY(this.player2, this.player2.x + this.x2TurnDirection + 1, this.player2.y + this.y2TurnDirection + 1);
-            this.player2.body.rotation += Math.PI / 2;
-        }
+if (this.x2TurnDirection !== 0 || this.y2TurnDirection !== 0) {
+    this.player2.body.rotation = this.game.physics.arcade.angleToXY(this.player2, this.player2.x + this.x2TurnDirection + 1, this.player2.y + this.y2TurnDirection + 1);
+    this.player2.body.rotation += Math.PI / 2;
+}
 
-        this.shield1.body.x = this.player1.x;
-        this.shield1.body.y = this.player1.y;
-        this.shield1.body.rotation = this.game.physics.arcade.angleToXY(this.player1, this.player2.x, this.player2.y);
-        this.shield1.body.rotation += Math.PI;
+this.shield1.body.x = this.player1.x;
+this.shield1.body.y = this.player1.y;
+this.shield1.body.rotation = this.game.physics.arcade.angleToXY(this.player1, this.player2.x, this.player2.y);
+this.shield1.body.rotation += Math.PI;
 
 
-        this.shield2.body.x = this.player2.x;
-        this.shield2.body.y = this.player2.y;
-        this.shield2.body.rotation = this.game.physics.arcade.angleToXY(this.player2, this.player1.x, this.player1.y);
-        this.shield2.body.rotation += Math.PI;
+this.shield2.body.x = this.player2.x;
+this.shield2.body.y = this.player2.y;
+this.shield2.body.rotation = this.game.physics.arcade.angleToXY(this.player2, this.player1.x, this.player1.y);
+this.shield2.body.rotation += Math.PI;
 
-        this.SCORPION_SPEED = 50;
-        this.scorpion.body.rotation = this.game.physics.arcade.angleToXY(this.scorpion, this.player1.x, this.player1.y);
-        this.scorpion.body.velocity.x = Math.cos(this.scorpion.body.rotation) * this.SCORPION_SPEED;
-        this.scorpion.body.velocity.y = Math.sin(this.scorpion.body.rotation) * this.SCORPION_SPEED;
-    },
-    
-    onWin : function() {
-        this.hitSound.play();
-        this.game.state.start('Win');
-    },
+this.SCORPION_SPEED = 50;
+this.scorpion.body.rotation = this.game.physics.arcade.angleToXY(this.scorpion, this.player1.x, this.player1.y);
+this.scorpion.body.velocity.x = Math.cos(this.scorpion.body.rotation) * this.SCORPION_SPEED;
+this.scorpion.body.velocity.y = Math.sin(this.scorpion.body.rotation) * this.SCORPION_SPEED;
+},
 
-    onLose : function() {
-        this.hitSound.play();
-        this.game.state.start('Lose');
-    },
+onWin : function() {
+    this.hitSound.play();
+    this.game.state.start('Win');
+},
 
-    addPhysicsMovmentAndColision : function(sprite) {
-        this.game.physics.p2.enable(sprite);
-        sprite.body.setCollisionGroup(this.scorpionCollisionGroup);
-        sprite.body.collides([this.shieldCollisionGroup, this.playerCollisionGroup]);
-    },
+onLose : function() {
+    this.hitSound.play();
+    this.game.state.start('Lose');
+},
 
-    addInputHandler : function(sprite, callback) {
-        sprite.inputEnabled = true;
-        sprite.events.onInputDown.add(callback, this);
-    },
-    
-    shutdown : function() {
-        this.game.gameplayMusic.stop();
-    },
+addPhysicsMovmentAndColision : function(sprite) {
+    this.game.physics.p2.enable(sprite);
+    sprite.body.setCollisionGroup(this.scorpionCollisionGroup);
+    sprite.body.collides([this.shieldCollisionGroup, this.playerCollisionGroup]);
+},
 
-    render : function() {
-    },
+addInputHandler : function(sprite, callback) {
+    sprite.inputEnabled = true;
+    sprite.events.onInputDown.add(callback, this);
+},
 
-    killScorpion : function() {
-        var xOffset = this.getRandomInt(-500, 500);
-        var yOffset = this.getRandomInt(-500, 500);
-        var rndCorner = this.getRandomInt(1, 4);
-        if (rndCorner == 1) {
-            xOffset = -500;
-        } else if (rndCorner == 2) {
-            xOffset = 500;
-        } else if (rndCorner == 3) {
-            yOffset = -500;
-        } else if (rndCorner == 4) {
-            yOffset = 500;
-        } 
+shutdown : function() {
+    this.game.gameplayMusic.stop();
+},
 
-        this.scorpion.body.x = this.player1.x + xOffset; 
-        this.scorpion.body.y = this.player1.y + yOffset;
-    },
+render : function() {
+},
+
+killScorpion : function() {
+    var xOffset = this.getRandomInt(-500, 500);
+    var yOffset = this.getRandomInt(-500, 500);
+    var rndCorner = this.getRandomInt(1, 4);
+    if (rndCorner == 1) {
+        xOffset = -500;
+    } else if (rndCorner == 2) {
+        xOffset = 500;
+    } else if (rndCorner == 3) {
+        yOffset = -500;
+    } else if (rndCorner == 4) {
+        yOffset = 500;
+    } 
+
+    this.scorpion.body.x = this.player1.x + xOffset; 
+    this.scorpion.body.y = this.player1.y + yOffset;
+},
 
     /**
  * Returns a random number between min (inclusive) and max (exclusive)
  */
-getRandomArbitrary : function(min, max) {
+ getRandomArbitrary : function(min, max) {
     return Math.random() * (max - min) + min;
 },
 
@@ -232,7 +232,7 @@ getRandomArbitrary : function(min, max) {
  * Returns a random integer between min (inclusive) and max (inclusive)
  * Using Math.round() will give you a non-uniform distribution!
  */
-getRandomInt : function (min, max) {
+ getRandomInt : function (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 };

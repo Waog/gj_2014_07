@@ -9,7 +9,7 @@ function Shield(scene, scorpion, carrier, protectee) {
 		this.sprite = this.scene.add.sprite(0, 0, "shield2");
 	}
 	this.sprite.anchor.setTo(0.5, 0.5);
-	scene.game.physics.p2.enable(this.sprite, true);
+	scene.game.physics.p2.enable(this.sprite);
 	this.sprite.body.setRectangle(15, 70, 40, 0);
 	this.sprite.body.setCollisionGroup(scene.game.shieldCollisionGroup);
 	this.sprite.body.collides(scene.game.scorpionCollisionGroup, scorpion.kill, scorpion);

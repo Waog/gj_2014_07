@@ -4,7 +4,7 @@ function Player(scene, playerNumber, loseCallback, loseCallbackThis) {
 
 	this.sprite = scene.add.sprite(30, 100, "player");
 	this.sprite.anchor.setTo(0.5, 0.5);
-	scene.game.physics.p2.enable(this.sprite, true);
+	scene.game.physics.p2.enable(this.sprite);
 	this.sprite.body.setCollisionGroup(scene.game.playerCollisionGroup);
 	this.sprite.body.collides(scene.game.scorpionCollisionGroup, loseCallback, loseCallbackThis);
 
@@ -26,44 +26,42 @@ Player.preload = function(scene) {
 };
 
 Player.prototype.update = function() {
-	
 	var keysToCheck = this.player1Keys;
 	if (this.playerNumber == 2) {
 		keysToCheck = this.player2Keys;
 	}
 
-	// player 1 control
-	this.x1TurnDirection;
-	this.y1TurnDirection;
+	this.xDirection;
+	this.yDirection;
 
 	if (keysToCheck.upKey.isDown)
 	{
 		this.sprite.body.y--;
-		this.y1TurnDirection = -1000;
+		this.yDirection = -1000;
 	}
 	else if (keysToCheck.downKey.isDown)
 	{
 		this.sprite.body.y++;
-		this.y1TurnDirection = 1000;
+		this.yDirection = 1000;
 	} else {
-		this.y1TurnDirection = 0;
+		this.yDirection = 0;
 	}
 
 	if (keysToCheck.leftKey.isDown)
 	{
 		this.sprite.body.x--;
-		this.x1TurnDirection = -1000;
+		this.xDirection = -1000;
 	}
 	else if (keysToCheck.rightKey.isDown)
 	{
 		this.sprite.body.x++;
-		this.x1TurnDirection = 1000;
+		this.xDirection = 1000;
 	} else {
-		this.x1TurnDirection = 0;
+		this.xDirection = 0;
 	}
 
-	if (this.x1TurnDirection !== 0 || this.y1TurnDirection !== 0) {
-		this.sprite.body.rotation = this.scene.game.physics.arcade.angleToXY(this.sprite, this.sprite.x + this.x1TurnDirection + 1, this.sprite.y + this.y1TurnDirection + 1);
+	if (this.xDirection !== 0 || this.yDirection !== 0) {
+		this.sprite.body.rotation = this.scene.game.physics.arcade.angleToXY(this.sprite, this.sprite.x + this.xDirection + 1, this.sprite.y + this.yDirection + 1);
 		this.sprite.body.rotation += Math.PI / 2;
 	}
 }

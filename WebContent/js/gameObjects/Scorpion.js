@@ -18,7 +18,7 @@ Scorpion.prototype.update = function(player) {
 };
 
 Scorpion.prototype.addPhysicsMovmentAndColision = function() {
-	this.game.physics.p2.enable(this.sprite, true);
+	this.game.physics.p2.enable(this.sprite);
 	this.sprite.body.setCollisionGroup(this.game.scorpionCollisionGroup);
 	this.sprite.body.collides([this.game.shieldCollisionGroup, this.game.playerCollisionGroup]);
 },

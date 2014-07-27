@@ -36,13 +36,7 @@ Scene.GameScene.prototype = {
         this.player1 = new Player(this, 1, this.onLose, this);
         this.player2 = new Player(this, 2, this.onLose, this);
         this.shield1 = new Shield(this, this.scorpion, this.player1, this.player2);
-
-        this.shield2 = this.add.sprite(this.player2.sprite.x, this.player2.sprite.y, "shield2");
-        this.shield2.anchor.setTo(0.5, 0.5);
-        this.game.physics.p2.enable(this.shield2);
-        this.shield2.body.setRectangle(15, 70, 40, 0);
-        this.shield2.body.setCollisionGroup(this.game.shieldCollisionGroup);
-        this.shield2.body.collides(this.game.scorpionCollisionGroup, this.scorpion.kill, this.scorpion);
+        this.shield2 = new Shield(this, this.scorpion, this.player2, this.player1);
 
         this.ship = this.add.sprite(600, 200, "ship");
         this.ship.anchor.setTo(0.5, 0.5);
@@ -57,12 +51,7 @@ Scene.GameScene.prototype = {
         this.player1.update();
         this.player2.update();
         this.shield1.update();
-
-        this.shield2.body.x = this.player2.sprite.x;
-        this.shield2.body.y = this.player2.sprite.y;
-        this.shield2.body.rotation = this.game.physics.arcade.angleToXY(this.player2.sprite, this.player1.sprite.x, this.player1.sprite.y);
-        this.shield2.body.rotation += Math.PI;
-
+        this.shield2.update();
         this.scorpion.update(this.player1.sprite);
     },
 

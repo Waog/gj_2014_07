@@ -3,7 +3,11 @@ function Shield(scene, scorpion, carrier, protectee) {
 	this.carrier = carrier;
 	this.protectee = protectee;
 
-	this.sprite = scene.add.sprite(0, 0, "shield1");
+	if (carrier.playerNumber == 1) {
+		this.sprite = this.scene.add.sprite(0, 0, "shield1");
+	} else {
+		this.sprite = this.scene.add.sprite(0, 0, "shield2");
+	}
 	this.sprite.anchor.setTo(0.5, 0.5);
 	scene.game.physics.p2.enable(this.sprite, true);
 	this.sprite.body.setRectangle(15, 70, 40, 0);

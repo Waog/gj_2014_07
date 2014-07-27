@@ -26,9 +26,7 @@ Scene.GameScene.prototype = {
         this.game.physics.p2.updateBoundsCollisionGroup();
 
         new Bg(this);
-
-        var tutorialString = "player 1: asdw\nplayer 2: arrow keys\nprotect each other!";
-        this.game.add.text(10, 10, tutorialString);
+        new Tutorial(this);
 
         this.scorpion = new Scorpion(800, 200, this.game, this);
         this.player1 = new Player(this, 1, this.onLose, this);
@@ -51,11 +49,6 @@ Scene.GameScene.prototype = {
     updateCamera: function() {
         var averageXPos = (this.player1.sprite.x + this.player2.sprite.x) / 2;
         var averageYPos = (this.player1.sprite.y + this.player2.sprite.y) / 2;
-
-        // TODO: remove debug code
-        // var averageXPos = this.player1.sprite.x;
-        // var averageYPos = this.player1.sprite.y;
-
 
         this.game.camera.focusOnXY(averageXPos, averageYPos);
     },

@@ -2,7 +2,9 @@ function Scorpion(x, y, game, scene) {
 	this.game = game;
 
 	this.sprite = scene.add.sprite(x, y, "scorpion");
-	this.addPhysicsMovmentAndColision();
+	this.game.physics.p2.enable(this.sprite);
+	this.sprite.body.setCollisionGroup(this.game.scorpionCollisionGroup);
+	this.sprite.body.collides([this.game.shieldCollisionGroup, this.game.playerCollisionGroup]);
 }
 
 Scorpion.SPEED = 150;
@@ -16,12 +18,6 @@ Scorpion.prototype.update = function(player) {
 	this.sprite.body.velocity.x = Math.cos(this.sprite.body.rotation) * Scorpion.SPEED;
 	this.sprite.body.velocity.y = Math.sin(this.sprite.body.rotation) * Scorpion.SPEED;
 };
-
-Scorpion.prototype.addPhysicsMovmentAndColision = function() {
-	this.game.physics.p2.enable(this.sprite);
-	this.sprite.body.setCollisionGroup(this.game.scorpionCollisionGroup);
-	this.sprite.body.collides([this.game.shieldCollisionGroup, this.game.playerCollisionGroup]);
-},
 
 Scorpion.prototype.kill = function() {
 	var xOffset = utils.getRndInt(-500, 500);

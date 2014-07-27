@@ -33,7 +33,7 @@ Scene.GameScene.prototype = {
         this.player2 = new Player(this, 2, this.onLose, this);
         this.shield1 = new Shield(this, this.scorpion, this.player1, this.player2);
         this.shield2 = new Shield(this, this.scorpion, this.player2, this.player1);
-        this.ship = new Ship(this);
+        this.ship = new Ship(this, this.onWin, this);
     },
 
     update : function() {

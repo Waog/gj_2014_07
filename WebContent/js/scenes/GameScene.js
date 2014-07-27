@@ -63,11 +63,6 @@ Scene.GameScene.prototype = {
         this.ship.body.setCollisionGroup(this.game.shipCollisionGroup);
         this.ship.body.collides(this.game.playerCollisionGroup, this.onWin, this);
 
-        this.upKey1 = this.game.input.keyboard.addKey(Phaser.Keyboard.W);
-        this.downKey1 = this.game.input.keyboard.addKey(Phaser.Keyboard.S);
-        this.leftKey1 = this.game.input.keyboard.addKey(Phaser.Keyboard.A);
-        this.rightKey1 = this.game.input.keyboard.addKey(Phaser.Keyboard.D);
-
         this.upKey2 = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
         this.downKey2 = this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
         this.leftKey2 = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
@@ -78,35 +73,9 @@ Scene.GameScene.prototype = {
 
     update : function() {
 
-// player 1 control
-this.x1TurnDirection;
-this.y1TurnDirection;
 
-if (this.upKey1.isDown)
-{
-    this.player1.sprite.body.y--;
-    this.y1TurnDirection = -1000;
-}
-else if (this.downKey1.isDown)
-{
-    this.player1.sprite.body.y++;
-    this.y1TurnDirection = 1000;
-} else {
-    this.y1TurnDirection = 0;
-}
+        this.player1.update();
 
-if (this.leftKey1.isDown)
-{
-    this.player1.sprite.body.x--;
-    this.x1TurnDirection = -1000;
-}
-else if (this.rightKey1.isDown)
-{
-    this.player1.sprite.body.x++;
-    this.x1TurnDirection = 1000;
-} else {
-    this.x1TurnDirection = 0;
-}
 
 // player 2 control
 this.x2TurnDirection;
@@ -138,11 +107,6 @@ else if (this.rightKey2.isDown)
 }
 else {
     this.x2TurnDirection = 0;
-}
-
-if (this.x1TurnDirection !== 0 || this.y1TurnDirection !== 0) {
-    this.player1.sprite.body.rotation = this.game.physics.arcade.angleToXY(this.player1.sprite, this.player1.sprite.x + this.x1TurnDirection + 1, this.player1.sprite.y + this.y1TurnDirection + 1);
-    this.player1.sprite.body.rotation += Math.PI / 2;
 }
 
 if (this.x2TurnDirection !== 0 || this.y2TurnDirection !== 0) {

@@ -19,6 +19,20 @@ utils.createButton = function(callbackHolder, game, textString, callback, x, y) 
 
 utils.getAudioFileArray = function(fileNameWithoutExtention) {
     return [ fileNameWithoutExtention + '.mp3',
-            fileNameWithoutExtention + '.ogg',
-            fileNameWithoutExtention + '.m4a' ];
+    fileNameWithoutExtention + '.ogg',
+    fileNameWithoutExtention + '.m4a' ];
+};
+
+/**
+ * Returns a random floating point number between min (inclusive) and max (exclusive).
+ */
+ utils.getRndFloat = function(min, max) {
+    return Math.random() * (max - min) + min;
+};
+
+/**
+ * Returns a random integer between min (inclusive) and max (inclusive)
+ */
+ utils.getRndInt = function (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 };
